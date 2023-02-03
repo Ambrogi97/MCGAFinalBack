@@ -7,17 +7,18 @@ const createProduct = (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     description: req.body.description,
+    image: req.body.image
   });
   product
     .save()
     .then(result => {
       res.status(201).json({
-        message: "Producto creado",
+        message: "Producto creado"
       });
     })
     .catch(err => {
       res.status(500).json({
-        message: "Error al crear el producto",
+        message: "Error al crear el producto"
       });
     });
 };
@@ -30,7 +31,7 @@ const getProducts = (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        message: "Error al obtener los productos",
+        message: "Error al obtener los productos"
       });
     });
 };
@@ -42,7 +43,7 @@ const getOneProduct = (req, res) => {
       res.status(200).json(product);
     } else {
       res.status(404).json({
-        message: "Producto no encontrado",
+        message: "Producto no encontrado"
       });
     }
   });
@@ -55,7 +56,7 @@ const getOneProductByName = (req, res) => {
       res.status(200).json(product);
     } else {
       res.status(404).json({
-        message: "Producto no encontrado",
+        message: "Producto no encontrado"
       });
     }
   });
@@ -63,17 +64,23 @@ const getOneProductByName = (req, res) => {
 
 // Borrar un producto
 const deleteProduct = (req, res) => {
-  Product.deleteOne({ _id: req.params.id }).then(product => {
-    if (product) {
-      res.status(200).json({
-        message: "Producto eliminado",
-      });
-    } else {
-      res.status(404).json({
-        message: "Producto no encontrado",
-      });
-    }
-  });
+  try {
+    Product.deleteOne({ _id: req.params.id }).then(product => {
+      if (product) {
+        res.status(200).json({
+          message: "Producto eliminado"
+        });
+      } else {
+        res.status(404).json({
+          message: "Producto no encontrado"
+        });
+      }
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Error al eliminar el producto"
+    });
+  }
 };
 
 //Actualizar un producto
@@ -84,15 +91,16 @@ const updateProduct = (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     description: req.body.description,
+    imageURL: req.body.imageURL
   });
   Product.updateOne({ _id: req.params.id }, product).then(product => {
     if (product) {
       res.status(200).json({
-        message: "Producto actualizado",
+        message: "Producto actualizado"
       });
     } else {
       res.status(404).json({
-        message: "Producto no encontrado",
+        message: "Producto no encontrado"
       });
     }
   });
@@ -104,5 +112,5 @@ export default {
   getOneProduct,
   deleteProduct,
   updateProduct,
-  getOneProductByName,
+  getOneProductByName
 };
