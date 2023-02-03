@@ -1,10 +1,11 @@
 import express from "express";
+import auth from "../middlewares/auth.js"
 
 import productController from "../controllers/products.js";
 
 const router = express.Router();
 
-router.post("/", productController.createProduct);
+router.post("/", auth, productController.createProduct);
 
 // obtener todos los productos
 router.get("/", productController.getProducts);
@@ -19,6 +20,6 @@ router.get("/name/:name", productController.getOneProductByName);
 router.delete("/:id", productController.deleteProduct);
 
 // actualizar un producto por id
-router.put("/:id", productController.updateProduct);
+router.put("/:id", auth, productController.updateProduct);
 
 export default router;

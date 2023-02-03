@@ -1,25 +1,31 @@
 import express from "express";
 
+import auth from "../middlewares/auth.js";
+import { loginValidator, signupValidator } from "../middlewares/validator.js";
+
 import userController from "../controllers/user.js";
 
 const router = express.Router();
 
 // signup
-router.post("/", userController.signup);
+router.post("/", signupValidator, userController.signup);
 
 // login
-router.post("/login", userController.login);
+router.post("/login", loginValidator, userController.login);
 
-// obtener todos los productos
-router.get("/", userController.getUsers);
+// obtener todos los usuarios
+router.get("/", auth, userController.getUsers);
 
-// obtener un producto por id
-router.get("/:id", userController.getUserById);
+// obtener un usuario por id
+router.get("/:id", auth, userController.getUserById);
 
-// eliminar un producto por id
-router.delete("/:id", userController.deleteUser);
+// obtener el usuario logueado
+router.post("/me", auth, userController.getMe);
 
-// actualizar un producto por id
-router.put("/:id", userController.updateUser);
+// eliminar un usuario por id
+router.delete("/:id", auth, userController.deleteUser);
+
+// actualizar un usuario por id
+router.put("/:id", auth, userController.updateUser);
 
 export default router;

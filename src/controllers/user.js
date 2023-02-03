@@ -61,6 +61,7 @@ const login = async (req, res) => {
           return res.status(200).json({
             message: "Auth successful",
             token,
+            user: { ...user._doc, password: undefined, __v: undefined },
           });
         }
         res.status(401).json({
@@ -163,10 +164,29 @@ const updateUser = async (req, res) => {
   }
 };
 
+const getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.auth.userId);
+    if (user) {
+      res.status(200).json({
+        message: "User fetched",
+        user: { ...user._doc, password: undefined, __v: undefined },
+      });
+    }
+
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+    });
+  }
+};
+
 // export routes
 export default {
   signup,
   login,
+  getMe,
   getUsers,
   getUserById,
   updateUser,
