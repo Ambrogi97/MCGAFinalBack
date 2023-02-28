@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-/**
- * Modelo de usuario
- */
 const User = mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },

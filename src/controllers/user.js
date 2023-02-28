@@ -3,10 +3,8 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import User from "../models/user.js";
 
-// configuracion de dotenv
 dotenv.config();
 
-// signup route
 const signup = (req, res) => {
   bcrypt.hash(req.body.password, 10, async (err, hash) => {
     if (err) {
@@ -38,7 +36,6 @@ const signup = (req, res) => {
   });
 };
 
-// login route
 const login = async (req, res) => {
   try {
     const user = await User.findOne({
@@ -81,7 +78,6 @@ const login = async (req, res) => {
   }
 };
 
-// get all users route using mongoose
 const getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -97,7 +93,6 @@ const getUsers = async (req, res) => {
   }
 };
 
-// get user by id route using mongoose
 const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -138,7 +133,6 @@ const deleteUser = async (req, res) => {
   }
 };
 
-// update user route with mongoose
 const updateUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

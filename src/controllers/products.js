@@ -1,6 +1,5 @@
 import Product from "../models/products.js";
 
-// Crear product
 const createProduct = (req, res) => {
   const product = new Product({
     name: req.body.name,
@@ -23,7 +22,6 @@ const createProduct = (req, res) => {
     });
 };
 
-// Obtener todos los productos
 const getProducts = (req, res) => {
   Product.find()
     .then(products => {
@@ -36,7 +34,6 @@ const getProducts = (req, res) => {
     });
 };
 
-// Obtener un producto por su id
 const getOneProduct = (req, res) => {
   Product.findById(req.params.id).then(product => {
     if (product) {
@@ -49,7 +46,6 @@ const getOneProduct = (req, res) => {
   });
 };
 
-// Obtener un producto por su nombre
 const getOneProductByName = (req, res) => {
   Product.findOne({ name: req.params.name }).then(product => {
     if (product) {
@@ -62,7 +58,6 @@ const getOneProductByName = (req, res) => {
   });
 };
 
-// Borrar un producto
 const deleteProduct = (req, res) => {
   try {
     Product.deleteOne({ _id: req.params.id }).then(product => {
@@ -83,7 +78,6 @@ const deleteProduct = (req, res) => {
   }
 };
 
-//Actualizar un producto
 const updateProduct = (req, res) => {
   const product = new Product({
     _id: req.params.id,
