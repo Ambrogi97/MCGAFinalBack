@@ -17,7 +17,6 @@ const app = express();
 
 app.use(express.json());
 
-// Ping prueba de estado
 app.get("/api/ping", (req, res) => {
     if (mongoose.connection.readyState === 1) {
       res.json({ message: "ok" });

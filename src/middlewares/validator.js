@@ -13,14 +13,21 @@ const validateMiddlewares = (req, res, next) => {
 }
 
 export const loginValidator = [
-    body('email', 'The email is required').notEmpty().isEmail(),
-    body('password', 'The password is required').notEmpty(),
+    body('email', 'El correo es requerido').notEmpty().isEmail(),
+    body('password', 'La contraseña es requerida').notEmpty(),
     validateMiddlewares
 ]
 
 export const signupValidator = [
-    body('name', 'The name is required').notEmpty(),
-    body('email', 'The email is required').notEmpty().isEmail(),
-    body('password', 'The password is required').notEmpty(),
+    body('name', 'El nombre es requerido').notEmpty(),
+    body('email', 'El correo es requerido').notEmpty().isEmail(),
+    body('password', 'La contraseña es requerida').notEmpty(),
+    validateMiddlewares
+]
+
+export const productValidator = [
+    body('name', 'El nombre es requerido').notEmpty(),
+    body('price', 'El precio es requerido').notEmpty().isNumeric(),
+    body('stock', 'El stock es requerido').notEmpty().isNumeric(),
     validateMiddlewares
 ]

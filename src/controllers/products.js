@@ -85,7 +85,7 @@ const updateProduct = (req, res) => {
     price: req.body.price,
     stock: req.body.stock,
     description: req.body.description,
-    imageURL: req.body.imageURL
+    image: req.body.image
   });
   Product.updateOne({ _id: req.params.id }, product).then(product => {
     if (product) {
