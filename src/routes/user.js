@@ -11,11 +11,11 @@ router.post("/", signupValidator, userController.signup);
 
 router.post("/login", loginValidator, userController.login);
 
+router.get("/me", auth, userController.getMe);
+
 router.get("/", auth, userController.getUsers);
 
 router.get("/:id", auth, userController.getUserById);
-
-router.post("/me", auth, userController.getMe);
 
 router.delete("/:id", auth, userController.deleteUser);
 
